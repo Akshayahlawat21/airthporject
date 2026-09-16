@@ -1,12 +1,11 @@
 import React from 'react';
-import { Layers, Plus, Zap, RefreshCw, Moon, Sun, BookOpen } from 'lucide-react';
+import { Layers, Plus, Zap, RefreshCw, Moon, Sun } from 'lucide-react';
 
 interface HeaderProps {
   theme: 'light' | 'dark';
   onToggleTheme: () => void;
   onOpenCreateModal: () => void;
   onOpenConcurrencyModal: () => void;
-  onOpenVivaGuide: () => void;
   onRefresh: () => void;
   isRefreshing: boolean;
   autoRefreshInterval: number;
@@ -20,7 +19,6 @@ export const Header: React.FC<HeaderProps> = ({
   onToggleTheme,
   onOpenCreateModal,
   onOpenConcurrencyModal,
-  onOpenVivaGuide,
   onRefresh,
   isRefreshing,
   autoRefreshInterval,
@@ -75,31 +73,10 @@ export const Header: React.FC<HeaderProps> = ({
           >
             Concurrency Lab
           </a>
-          <a
-            href="#viva"
-            className={`nav-item ${activeNav === 'viva' ? 'active' : ''}`}
-            onClick={(e) => {
-              e.preventDefault();
-              onOpenVivaGuide();
-            }}
-            style={{ color: 'var(--brand-blue)', fontWeight: 700 }}
-          >
-            📖 Viva Guide
-          </a>
         </nav>
 
         {/* Right Nav Actions */}
         <div className="nav-actions">
-          {/* Viva Guide Trigger */}
-          <button
-            className="btn btn-outline-primary btn-sm"
-            onClick={onOpenVivaGuide}
-            title="Open Viva Prep & Architecture Guide"
-          >
-            <BookOpen size={14} />
-            <span>Viva Guide</span>
-          </button>
-
           {/* Light / Dark Mode Toggle Moon/Sun Button */}
           <button
             className="theme-toggle-btn"

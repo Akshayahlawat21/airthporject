@@ -11,7 +11,6 @@ import { CreateJobModal } from './components/CreateJobModal';
 import { ConcurrencyModal } from './components/ConcurrencyModal';
 import { FailJobModal } from './components/FailJobModal';
 import { DeleteJobModal } from './components/DeleteJobModal';
-import { VivaGuideModal } from './components/VivaGuideModal';
 import { Toast, ToastMessage } from './components/Toast';
 
 export const App: React.FC = () => {
@@ -41,7 +40,6 @@ export const App: React.FC = () => {
   // Modals
   const [isCreateOpen, setIsCreateOpen] = useState<boolean>(false);
   const [isConcurrencyOpen, setIsConcurrencyOpen] = useState<boolean>(false);
-  const [isVivaGuideOpen, setIsVivaGuideOpen] = useState<boolean>(false);
   const [failTargetJob, setFailTargetJob] = useState<Job | null>(null);
   const [deleteTargetJob, setDeleteTargetJob] = useState<Job | null>(null);
 
@@ -181,13 +179,12 @@ export const App: React.FC = () => {
 
   return (
     <div className="app-wrapper">
-      {/* Top Navbar with Moon / Sun Toggle & Viva Guide Link */}
+      {/* Top Navbar with Moon / Sun Toggle */}
       <Header
         theme={theme}
         onToggleTheme={toggleTheme}
         onOpenCreateModal={() => setIsCreateOpen(true)}
         onOpenConcurrencyModal={() => setIsConcurrencyOpen(true)}
-        onOpenVivaGuide={() => setIsVivaGuideOpen(true)}
         onRefresh={() => fetchData(false)}
         isRefreshing={isRefreshing}
         autoRefreshInterval={autoRefreshInterval}
@@ -196,8 +193,6 @@ export const App: React.FC = () => {
           if (nav === 'jobs') {
             const el = document.getElementById('jobs-section');
             if (el) el.scrollIntoView({ behavior: 'smooth' });
-          } else if (nav === 'viva') {
-            setIsVivaGuideOpen(true);
           } else {
             window.scrollTo({ top: 0, behavior: 'smooth' });
           }
@@ -292,11 +287,6 @@ export const App: React.FC = () => {
         onSubmit={async (id, reason) => {
           await handleUpdateStatus(id, 'failed', reason);
         }}
-      />
-
-      <VivaGuideModal
-        isOpen={isVivaGuideOpen}
-        onClose={() => setIsVivaGuideOpen(false)}
       />
 
       <Toast toasts={toasts} onDismiss={dismissToast} />
