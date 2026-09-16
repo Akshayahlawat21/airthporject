@@ -1,0 +1,65 @@
+"use strict";
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Job = void 0;
+const typeorm_1 = require("typeorm");
+const swagger_1 = require("@nestjs/swagger");
+const job_status_enum_1 = require("../../common/enums/job-status.enum");
+let Job = class Job {
+};
+exports.Job = Job;
+__decorate([
+    (0, swagger_1.ApiProperty)({ example: 'a1b2c3d4-e5f6-7a8b-9c0d-1e2f3a4b5c6d', description: 'Unique Job ID (UUID)' }),
+    (0, typeorm_1.PrimaryGeneratedColumn)('uuid'),
+    __metadata("design:type", String)
+], Job.prototype, "id", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ example: 'Process Monthly Invoices', description: 'Job Title' }),
+    (0, typeorm_1.Column)({ type: 'varchar', length: 255 }),
+    __metadata("design:type", String)
+], Job.prototype, "title", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ example: 'data-processing', description: 'Job Type' }),
+    (0, typeorm_1.Column)({ type: 'varchar', length: 100 }),
+    __metadata("design:type", String)
+], Job.prototype, "type", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ enum: job_status_enum_1.JobStatus, example: job_status_enum_1.JobStatus.PENDING, description: 'Current Job Status' }),
+    (0, typeorm_1.Column)({
+        type: 'text',
+        default: job_status_enum_1.JobStatus.PENDING,
+    }),
+    __metadata("design:type", String)
+], Job.prototype, "status", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ example: 'Database timeout', description: 'Failure reason if job failed', required: false }),
+    (0, typeorm_1.Column)({ type: 'text', nullable: true }),
+    __metadata("design:type", String)
+], Job.prototype, "errorMessage", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ example: 1, description: 'Version number for optimistic locking' }),
+    (0, typeorm_1.VersionColumn)({ default: 1 }),
+    __metadata("design:type", Number)
+], Job.prototype, "version", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Job creation timestamp' }),
+    (0, typeorm_1.CreateDateColumn)(),
+    __metadata("design:type", Date)
+], Job.prototype, "createdAt", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Job last updated timestamp' }),
+    (0, typeorm_1.UpdateDateColumn)(),
+    __metadata("design:type", Date)
+], Job.prototype, "updatedAt", void 0);
+exports.Job = Job = __decorate([
+    (0, typeorm_1.Entity)('jobs')
+], Job);
+//# sourceMappingURL=job.entity.js.map

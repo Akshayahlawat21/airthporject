@@ -1,0 +1,13 @@
+{
+  "name": "mini-job-queue-workspace",
+  "version": "1.0.0",
+  "description": "Mini Job Queue Dashboard - NestJS + React with Concurrency Protection",
+  "scripts": {
+    "install:all": "npm --prefix backend install && npm --prefix frontend install",
+    "start:backend": "npm --prefix backend run start:dev",
+    "start:frontend": "npm --prefix frontend run dev",
+    "test:backend": "npm --prefix backend run test",
+    "test:e2e": "npm --prefix backend run test:e2e",
+    "build:all": "npm --prefix backend run build && npm --prefix frontend run build"
+  }
+}
